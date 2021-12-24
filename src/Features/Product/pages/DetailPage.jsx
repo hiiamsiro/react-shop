@@ -52,7 +52,7 @@ function DetailPage(props) {
                         </Grid>
                         <Grid item className={classes.right}>
                             <ProductInfo product={product}></ProductInfo>
-                            
+                            <AddToCartForm onSubmit={handleAddToCartSubmit}></AddToCartForm>
                         </Grid>
                     </Grid>
                 </Paper>
