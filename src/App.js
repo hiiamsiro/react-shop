@@ -9,6 +9,7 @@ import './App.css';
 import NotFound from './Components/NotFound';
 import AlbumFeature from './Features/Album';
 import TodoFeatures from './Features/Todo';
+import CartFeature from './Features/Cart';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/todos" component={TodoFeatures}/>
         <Route path="/albums" component={AlbumFeature}/>
         <Route path="/products" component={ProductFeature}/>
+        <Route path="/cart" component={CartFeature}/>
 
 
         <Route component={NotFound}/>

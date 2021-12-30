@@ -14,12 +14,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Register from 'Features/Auth/components/Register';
-import { AccountCircle, Close } from '@mui/icons-material';
+import { AccountCircle, Close, ShoppingCart } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles';
 import Login from 'Features/Auth/components/Login';
 import { useDispatch, useSelector } from 'react-redux';
-import { Menu, MenuItem } from '@mui/material';
+import { Badge, Menu, MenuItem } from '@mui/material';
 import { logout } from 'Features/Auth/userSlice';
+import { cartItemsCountSelector } from 'Features/Cart/selector';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -33,9 +35,11 @@ const MODE = {
 export default function Header() {
   const loggedInUser = useSelector(state => state.user.current);
   const isLoggedIn = !!loggedInUser.id; //cho gía trị Boolean cho loggedInUser (true)
+  const cartItemsCount = useSelector(cartItemsCountSelector);
   
   const classes = useStyles();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const [mode, setMode] = React.useState(MODE.LOGIN);
 
@@ -59,6 +63,10 @@ export default function Header() {
     const action = logout();
     dispatch(action);
   }
+
+  const handleCartClick = () => {
+    history.push('/cart');
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -102,6 +110,12 @@ export default function Header() {
           {!isLoggedIn && (
             <Button onClick={handleClickOpen} color="inherit">Login</Button>
           )}
+
+          <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={handleCartClick}>
+            <Badge badgeContent={cartItemsCount} color="error">
+              <ShoppingCart />
+            </Badge>
+          </IconButton>
 
           {isLoggedIn && (
             <IconButton color="inherit" onClick={handleUserClick}>
