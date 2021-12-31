@@ -14,13 +14,13 @@ import { makeStyles } from '@mui/styles';
 QuantityField.propTypes = {
     form: PropTypes.object.isRequired,
     name: PropTypes.object.isRequired,
-
+    onChangeRHF: PropTypes.func,
     label: PropTypes.string,
     disabled: PropTypes.bool
 };
 
 function QuantityField(props) {
-    const {form,name,label,disabled} = props; //form là props của const form = useForm bên TodoForm
+    const {form,name,label,disabled,onChangeRHF} = props; //form là props của const form = useForm bên TodoForm
     const {control, setValue, formState: { errors,touchedFields }} = form; //lấy ra object form trong props form trên
     const hasError = !!errors[name];
     
@@ -35,7 +35,9 @@ function QuantityField(props) {
       }
     });
     const classes = useStyles();
-
+    const handleChange = (value) => {
+      onChangeRHF(value)
+    }
     return (
         <div>
             {/* <Controller
@@ -79,8 +81,8 @@ function QuantityField(props) {
                     name={name}
                     value={value}
                     disabled={disabled}
-                    onChange={onChange}
-                    onBlur={onBlur}
+                    onChange={() => handleChange(value)}
+                    onBlur={() => handleChange(value)}
                 />
 
                 <IconButton onClick={() => setValue(name, Number.parseInt(value) ? Number.parseInt(value) + 1 : 1)}>

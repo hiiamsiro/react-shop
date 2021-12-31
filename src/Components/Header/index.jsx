@@ -1,27 +1,22 @@
-import * as React from 'react';
+import { AccountCircle, Close, ShoppingCart } from '@mui/icons-material';
+import CodeIcon from '@mui/icons-material/Code';
+import { Badge, Menu, MenuItem } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import CodeIcon from '@mui/icons-material/Code';
-import { Link, NavLink } from 'react-router-dom';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Register from 'Features/Auth/components/Register';
-import { AccountCircle, Close, ShoppingCart } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles';
 import Login from 'Features/Auth/components/Login';
-import { useDispatch, useSelector } from 'react-redux';
-import { Badge, Menu, MenuItem } from '@mui/material';
+import Register from 'Features/Auth/components/Register';
 import { logout } from 'Features/Auth/userSlice';
 import { cartItemsCountSelector } from 'Features/Cart/selector';
-import { useHistory } from 'react-router-dom';
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -89,23 +84,6 @@ export default function Header() {
               }}
               to="/">EZ Shop </Link> 
           </Typography>
-
-          <NavLink 
-            style={{
-              textDecoration: 'none',
-              color: 'white',
-            }}
-            to="/todos">
-            <Button color="inherit">Todos</Button>  
-          </NavLink>
-          <NavLink 
-            style={{
-              textDecoration: 'none',
-              color: 'white',
-            }}
-            to="/albums">
-            <Button color="inherit">Album</Button>
-          </NavLink>
           
           {!isLoggedIn && (
             <Button onClick={handleClickOpen} color="inherit">Login</Button>

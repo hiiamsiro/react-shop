@@ -23,6 +23,7 @@ function DetailPage(props) {
         params: {productId},
         url
     } = useRouteMatch();
+
     const dispatch = useDispatch();
 
     const useStyles = makeStyles({

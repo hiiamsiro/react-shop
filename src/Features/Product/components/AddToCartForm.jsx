@@ -33,7 +33,6 @@ function AddToCartForm({onSubmit = null}) {
         if(onSubmit){
             await onSubmit(value);
         }
-        
     }
 
     return (
