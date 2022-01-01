@@ -13,6 +13,8 @@ import { makeStyles } from '@mui/styles';
 import Login from 'Features/Auth/components/Login';
 import Register from 'Features/Auth/components/Register';
 import { logout } from 'Features/Auth/userSlice';
+import { hideMiniCart } from 'Features/Cart/cartSlice';
+import MiniCart from 'Features/Cart/MiniCart';
 import { cartItemsCountSelector } from 'Features/Cart/selector';
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +22,15 @@ import { Link, useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
-
+  root: {
+    flexGrow: 1,
+    position: 'relative',
+  },
+  miniCart: {
+    position: 'absolute',
+    top: '48px',
+    right: '72px',
+},
 });
 const MODE = {
   LOGIN: 'login',
@@ -31,6 +41,9 @@ export default function Header() {
   const loggedInUser = useSelector(state => state.user.current);
   const isLoggedIn = !!loggedInUser.id; //cho gía trị Boolean cho loggedInUser (true)
   const cartItemsCount = useSelector(cartItemsCountSelector);
+
+  const showMiniCart = useSelector(state => state.cart.showMiniCart);
+
   
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -62,9 +75,14 @@ export default function Header() {
   const handleCartClick = () => {
     history.push('/cart');
   };
+  
+  const handleCartClose = () => {
+    const action = hideMiniCart();
+    dispatch(action);
+  }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box className={classes.root} sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
   
@@ -94,6 +112,11 @@ export default function Header() {
               <ShoppingCart />
             </Badge>
           </IconButton>
+          <Box className={classes.miniCart}>
+            {showMiniCart && (
+              <MiniCart onClose={handleCartClose} />
+            )}
+          </Box>
 
           {isLoggedIn && (
             <IconButton color="inherit" onClick={handleUserClick}>

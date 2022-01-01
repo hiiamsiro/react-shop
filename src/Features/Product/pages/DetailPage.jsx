@@ -12,7 +12,7 @@ import ProductDescription from './../components/ProductDescription';
 import ProductAdditional from './../components/ProductAdditional';
 import ProductReviews from './../components/ProductReviews';
 import { useDispatch } from 'react-redux';
-import { addToCart } from 'Features/Cart/cartSlice';
+import { addToCart, showMiniCart } from 'Features/Cart/cartSlice';
 
 DetailPage.propTypes = {
     
@@ -67,6 +67,7 @@ function DetailPage(props) {
             quantity: formValues.quantity,
         });
         dispatch(action);
+        dispatch(showMiniCart());
     }
 
     return (

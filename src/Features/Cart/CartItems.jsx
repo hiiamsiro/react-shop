@@ -87,7 +87,7 @@ function CartItems({data, onSubmit, onRemoveItem}) {
                 <img src={thumbnailUrl} alt={data.product.name} className={classes.image}/>
                 <Box className={classes.cartInfoName} component='span'>
                     {data.product.name}
-                    <Link component="button" variant="body2" onClick={() => handleRemoveItem(data.id)}>Xóa</Link>
+                    <Typography sx={{cursor: 'pointer'}} color="primary" variant="body2" onClick={() => handleRemoveItem(data.id)}>Xóa</Typography>
                 </Box>
                 
             </Paper>

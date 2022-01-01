@@ -4,11 +4,11 @@ import { Box } from '@mui/system';
 import { Grid } from '@mui/material';
 import CartItems from './CartItems';
 
-cartListItems.propTypes = {
+CartListItems.propTypes = {
     
 };
 
-function cartListItems({productCart, onSubmit = null, onSubmitRemove = null }) {
+function CartListItems({productCart, onSubmit = null, onSubmitRemove = null }) {
     const handleQtyChange = (newQuantity) => {
         if(!onSubmit) return;
         onSubmit(newQuantity);
@@ -32,4 +32,4 @@ function cartListItems({productCart, onSubmit = null, onSubmitRemove = null }) {
     );
 }
 
-export default cartListItems;
+export default CartListItems;
