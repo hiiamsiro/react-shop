@@ -6,7 +6,7 @@ import { Container, Paper, Grid, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import CartListItems from './CartListItems';
 import { formatPrice } from './../../utils/common';
-import { setQuantity } from 'Features/Cart/cartSlice';
+import { setQuantity, removeFromCart } from 'Features/Cart/cartSlice';
 
 
 CartFeature.propTypes = {
@@ -42,9 +42,10 @@ function CartFeature(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
     
-    const cartItems = useSelector(cartItemsSelector);
     const cartItemsCount = useSelector(cartItemsCountSelector);
     const cartTotal = useSelector(cartTotalSelector);
+
+    const cartItems = useSelector(cartItemsSelector);
 
     const handleOnChangeItems = (newValues) => {
         const action = setQuantity({
@@ -53,6 +54,12 @@ function CartFeature(props) {
         })
         dispatch(action);
     }
+
+    const handleOnRemoveItems = (newId) => {
+        const action = removeFromCart(newId);
+        dispatch(action);
+    }
+    
     return (
         <Box className={classes.root}>
             <Container>
@@ -63,7 +70,7 @@ function CartFeature(props) {
                             GIỎ HÀNG: {cartItemsCount} sản phẩm
                         </Typography>
                         
-                        <CartListItems productCart={cartItems} onSubmit={handleOnChangeItems}></CartListItems>
+                        <CartListItems productCart={cartItems} onSubmit={handleOnChangeItems} onSubmitRemove={handleOnRemoveItems}></CartListItems>
                         </Paper>
                     </Grid>
 

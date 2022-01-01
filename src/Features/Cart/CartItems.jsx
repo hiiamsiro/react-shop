@@ -9,12 +9,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import QuantityField from './../../Components/form-controls/QuantityField/index';
+import { Link } from 'react-router-dom';
 
 CartItems.propTypes = {
     
 };
 
-function CartItems({data, onSubmit}) {
+function CartItems({data, onSubmit, onRemoveItem}) {
     const useStyles = makeStyles({
         root: {
             padding: '16px',
@@ -40,12 +41,14 @@ function CartItems({data, onSubmit}) {
         originalPrice: {
             textDecoration: 'line-through',
             color: '#DCDCDC'
+        },
+        cartRemove: {
+
         }
     })
     const classes = useStyles();
     const thumbnailUrl = data.product.thumbnail ? `${STATIC_HOST}${data.product.thumbnail?.url}` : THUMBNAIL_PLACEHOLDER;
     const {id, product, quantity} = data;
-
     const schema = yup.object().shape({
         quantity: yup
             .number()
@@ -73,12 +76,18 @@ function CartItems({data, onSubmit}) {
         onSubmit(values);
     }
 
+    const handleRemoveItem =  (id) => {
+        if (!onRemoveItem) return;
+        onRemoveItem(id);
+    }
+
     return (
         <form className={classes.root} onSubmit={form.handleSubmit(handleSubmit)}>
             <Paper className={classes.cartInfo} elevation={0}>
                 <img src={thumbnailUrl} alt={data.product.name} className={classes.image}/>
                 <Box className={classes.cartInfoName} component='span'>
                     {data.product.name}
+                    <Link component="button" variant="body2" onClick={() => handleRemoveItem(data.id)}>Xóa</Link>
                 </Box>
                 
             </Paper>
