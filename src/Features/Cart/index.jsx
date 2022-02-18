@@ -89,7 +89,7 @@ function CartFeature(props) {
           <Grid item sx={{ flex: "1 1 0" }}>
             <Paper elevation={0} sx={{ minHeight: "200px" }}>
               <Typography className={classes.cartCount} variant="subtitle2">
-                GIỎ HÀNG: {cartItemsCount} sản phẩm
+                GIỎ HÀNG: {Number.parseInt(cartItemsCount)} sản phẩm
               </Typography>
 
               <CartListItems

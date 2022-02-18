@@ -96,7 +96,10 @@ function QuantityField(props) {
                 name={name}
                 value={value}
                 disabled={disabled}
-                onChange={onChange}
+                onChange={(e) => {
+                  onChange(e.target.value);
+                  handleChange(e.target.value);
+                }}
                 onBlur={() => handleChange(value)}
               />
 
@@ -113,7 +116,7 @@ function QuantityField(props) {
             </Box>
           )}
         />
-
+        {/* Lưu ý khi validate field phải thêm FormHelperText */}
         <FormHelperText>{errors[name]?.message}</FormHelperText>
       </FormControl>
     </div>
